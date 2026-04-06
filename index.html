@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bad Apple ASCII</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; background: #000; overflow: hidden; }
+    canvas { display: block; }
+    #overlay {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-family: "Geist Mono", monospace;
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      pointer-events: none;
+      text-align: center;
+      line-height: 2;
+    }
+    #overlay span {
+      display: block;
+      font-size: 0.85rem;
+      opacity: 0.5;
+    }
+    #end-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      align-items: center;
+      justify-content: center;
+      z-index: 500;
+    }
+    #end-restart {
+      font-family: "Geist Mono", monospace;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      color: #000;
+      background: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 32px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    #end-restart:hover {
+      background: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <div id="overlay">
+    [ CLICK TO START ]
+    <span id="overlay-subtitle">BAD APPLE // ASCII</span>
+  </div>
+  <div id="end-screen">
+    <button id="end-restart" onclick="window.__restart()">↺ Restart</button>
+  </div>
+  <audio id="audio" src="./audio.mp3" preload="auto"></audio>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
