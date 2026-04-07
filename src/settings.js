@@ -5,7 +5,7 @@ const STORAGE_KEY = 'badapple-settings-v1'
 
 export const DEFAULTS = {
   // Characters
-  fgChars: '@#$%&*!?ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz',
+  fgChars: 'tuyu',
   bgChars: '.,;:-~^`\'"_<>|/\\',
   showBg: false,
 

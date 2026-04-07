@@ -32,7 +32,7 @@ let preparedLevels = []   // index matches LEVEL_DEFS
 let started        = false
 let animId         = null
 let continuousCursors = null   // array of cursors, one per level
-let currentVideo   = VIDEOS[0]
+let currentVideo   = VIDEOS[1]
 let currentImage   = null      // loaded Image element for image mode
 let imageSegments  = null      // cached segments for current image + row count
 

@@ -1,0 +1,12 @@
+# Large media assets — stored in Supabase, not git
+public/videos/**/*.mp4
+public/videos/**/*.mp3
+public/videos/**/*.bin
+bad_apple.mp4
+
+# macOS
+.DS_Store
+
+# Vite / Node
+node_modules/
+dist/
