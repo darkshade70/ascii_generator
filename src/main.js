@@ -32,7 +32,7 @@ let preparedLevels = []   // index matches LEVEL_DEFS
 let started        = false
 let animId         = null
 let continuousCursors = null   // array of cursors, one per level
-let currentVideo   = VIDEOS[1]
+let currentVideo   = VIDEOS[0]
 let currentImage   = null      // loaded Image element for image mode
 let imageSegments  = null      // cached segments for current image + row count
 
@@ -90,12 +90,21 @@ function toDisplayLevel(colorType, videoLevels) {
 }
 
 // ── Video loading ─────────────────────────────────────────────────────────────
+function showLoader() {
+  document.getElementById('loader').classList.add('visible')
+}
+function hideLoader() {
+  document.getElementById('loader').classList.remove('visible')
+}
+
 async function loadVideo(video) {
   currentVideo = video
   frameOffsets = []
   cancelAnimationFrame(animId)
+  animId = null
   audio.pause()
   document.getElementById('end-screen').style.display = 'none'
+  showLoader()
 
   let framesBuffer
   try {
@@ -103,6 +112,7 @@ async function loadVideo(video) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     framesBuffer = await res.arrayBuffer()
   } catch (e) {
+    hideLoader()
     showError(`Could not load ${video.title}\n${e.message}`)
     return
   }
@@ -117,10 +127,19 @@ async function loadVideo(video) {
 
   audio.src = video.audioPath
   audio.load()
+
+  // Wait for enough audio to play through without buffering
+  await new Promise((resolve) => {
+    if (audio.readyState >= 4) { resolve(); return }
+    audio.addEventListener('canplaythrough', resolve, { once: true })
+  })
+
   rebuildPrepared()
 
   const sub = document.getElementById('overlay-subtitle')
   if (sub) sub.textContent = `${video.title.toUpperCase()} // ASCII`
+
+  hideLoader()
 
   if (started && getMode() === 'video') {
     audio.play()

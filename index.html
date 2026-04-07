@@ -52,6 +52,37 @@
     #end-restart:hover {
       background: #ddd;
     }
+    #loader {
+      display: none;
+      position: fixed;
+      inset: 0;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 600;
+      pointer-events: none;
+    }
+    #loader.visible {
+      display: flex;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255,255,255,0.15);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    #loader-text {
+      font-family: "Geist Mono", monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.4);
+    }
   </style>
 </head>
 <body>
@@ -59,6 +90,10 @@
   <div id="overlay">
     [ CLICK TO START ]
     <span id="overlay-subtitle">BAD APPLE // ASCII</span>
+  </div>
+  <div id="loader">
+    <div class="spinner"></div>
+    <div id="loader-text">LOADING...</div>
   </div>
   <div id="end-screen">
     <button id="end-restart" onclick="window.__restart()">↺ Restart</button>
